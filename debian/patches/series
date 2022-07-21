@@ -6,3 +6,4 @@ git_reported_os.patch
 git_can_persist.patch
 git_tpm2_key.patch
 git_password_config.patch
+deepin-bug-63126-hide-auth-dialog.patch
