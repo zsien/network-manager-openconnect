@@ -8,45 +8,29 @@
   <name>OpenConnect VPN client</name>
   <name xml:lang="ca">Client VPN OpenConnect</name>
   <name xml:lang="cs">VPN klient OpenConnect</name>
-  <name xml:lang="da">OpenConnect VPN-klient</name>
   <name xml:lang="de">OpenConnect VPN-Client</name>
   <name xml:lang="es">Cliente de VPN OpenConnect</name>
-  <name xml:lang="fi">OpenConnect-VPN-asiakas</name>
-  <name xml:lang="hr">OpenConnect VPN klijent</name>
   <name xml:lang="hu">OpenConnect VPN kliens</name>
   <name xml:lang="id">Klien VPN OpenConnect</name>
   <name xml:lang="lt">OpenConnect VPN klientas</name>
-  <name xml:lang="nl">OpenConnect-VPN-cliënt</name>
   <name xml:lang="pl">Klient VPN OpenConnect</name>
   <name xml:lang="pt_BR">Cliente VPN OpenConnect</name>
-  <name xml:lang="sk">Klient VPN OpenConnect</name>
   <name xml:lang="sr">ВПН клијент Отореног повезивања</name>
   <name xml:lang="sr@latin">VPN klijent Otorenog povezivanja</name>
   <name xml:lang="sv">OpenConnect VPN-klient</name>
-  <name xml:lang="tr">OpenConnect VPN istemcisi</name>
-  <name xml:lang="uk">Клієнт VPN OpenConnect</name>
-  <name xml:lang="zh_CN">OpenConnect VPN 客户端</name>
   <summary>Client for Cisco AnyConnect SSL VPN virtual private networks</summary>
   <summary xml:lang="ca">Client per a xarxes privades virtuals Cisco AnyConnect SSL VPN</summary>
   <summary xml:lang="cs">Klient pro virtuální privátní sítě Cisco AnyConnect SLL VPN</summary>
-  <summary xml:lang="da">Klient til Ciscos AnyConnect virtuelle private SSL VPN-netværk</summary>
   <summary xml:lang="de">Client für SSL VPN virtuelle private Netze mit Cisco AnyConnect</summary>
   <summary xml:lang="es">Cliente para redes privadas virtuales de Cisco VPN AnyConnect SSL</summary>
-  <summary xml:lang="fi">Asiakasohjelmisto Ciscon AnyConnect SSL VPN -virtuaalierillisverkkoihin</summary>
-  <summary xml:lang="hr">Klijent za Cisco AnyConnect SSL VPN virtualne privatne mreže</summary>
   <summary xml:lang="hu">Kliens a Cisco AnyConnect SSL VPN virtuális magánhálózatokhoz</summary>
   <summary xml:lang="id">Klien bagi virtual private network VPN SSL AnyConnect Cisco</summary>
   <summary xml:lang="lt">Klientas Cisco AnyConnect SSL VPN virtualiems privatiems tinklams</summary>
-  <summary xml:lang="nl">Cliënt voor virtuele privénetwerken van Cisco AnyConnect SSL VPN</summary>
   <summary xml:lang="pl">Klient dla wirtualnych sieci prywatnych Cisco AnyConnect SSL VPN</summary>
   <summary xml:lang="pt_BR">Cliente para redes privadas virtuais Cisco AnyConnect SSL VPN</summary>
-  <summary xml:lang="sk">Klient pre virtuálne súkromné siete VPN Cisco AnyConnect  SSL</summary>
   <summary xml:lang="sr">Клијент за Цискове Ени конект ССЛ ВПН виртуелне приватне мреже</summary>
   <summary xml:lang="sr@latin">Klijent za Ciskove Eni konekt SSL VPN virtuelne privatne mreže</summary>
   <summary xml:lang="sv">Klient för Cisco AnyConnect SSL VPN virtuella privata nätverk</summary>
-  <summary xml:lang="tr">Cisco AnyConnect SSL VPN sanal özel ağları için istemci</summary>
-  <summary xml:lang="uk">Клієнт для віртуальних приватних мереж VPN SSL AnyConnect Cisco</summary>
-  <summary xml:lang="zh_CN">思科 AnyConnect SSL VPN 虚拟专用网络的客户端</summary>
 
   <keywords>
     <keyword>network</keyword>
@@ -63,79 +47,54 @@
 
   <description>
     <p>Support for configuring SSL VPN virtual private network connections using OpenConnect.</p>
-    <p xml:lang="ca">Suport per a configurar connexions de xarxes privades virtuals SSL VPN usant l'OpenConnect.</p>
+    <p xml:lang="ca">Suport per configurar connexions de xarxes privades virtuals SSL VPN usant l'OpenConnect.</p>
     <p xml:lang="cs">Podpora pro nastavení připojení k virtuálním privátním sítím SSL VPN pomocí OpenConnect.</p>
-    <p xml:lang="da">Konfigurationsunderstøttelse af virtuelle private SSL VPN-netværksforbindelser med brug af OpenConnect.</p>
     <p xml:lang="de">Unterstützung zum Einrichten von SSL VPN virtuellen privaten Netzverbindungen mit Hilfe von OpenConnect.</p>
     <p xml:lang="es">Soporte para configurar conexiones a redes privadas virtuales SSL VPN usando OpenConnect.</p>
-    <p xml:lang="fi">Asetustuki SSL VPN -erillisverkkoyhteyksille, jotka käyttävät OpenConnectia.</p>
-    <p xml:lang="hr">Podržava podešavanje SSL VPN virtualnih privatnih mreža korištenjem OpenConnecta.</p>
     <p xml:lang="hu">Az SSL VPN virtuális magánhálózati kapcsolatok beállításának támogatása az OpenConnect használatával.</p>
     <p xml:lang="id">Dukungan untuk melakukan konfigurasi koneksi virtual private network SSL VPN memakai OpenConnect.</p>
     <p xml:lang="lt">SSL VPN virtualių privačių tinklų ryšių naudojant OpenConnect konfigūravimo palaikymas.</p>
-    <p xml:lang="nl">Ondersteuning voor configuratie van SSL-VPN-virtueleprivénetwerkverbindingen met OpenConnect.</p>
     <p xml:lang="pl">Obsługa konfigurowania wirtualnych sieci prywatnych SSL VPN za pomocą OpenConnect.</p>
     <p xml:lang="pt_BR">Suporte para configuração de conexões de rede privada virtual SSL VPN usando OpenConnect.</p>
-    <p xml:lang="sk">Podpora pre nastavenie pripojení virtuálnej súkromnej siete SSL VPN pomocou OpenConnect.</p>
     <p xml:lang="sr">Подршка за подешавање веза ССЛ ВПН виртуелних приватних мрежа које користе Отворено повезивање.</p>
     <p xml:lang="sr@latin">Podrška za podešavanje veza SSL VPN virtuelnih privatnih mreža koje koriste Otvoreno povezivanje.</p>
     <p xml:lang="sv">Stöd för att konfigurera SSL VPN virtuella privata nätverksanslutningar med OpenConnect.</p>
-    <p xml:lang="tr">OpenConnect kullanarak SSL VPN sanal özel ağ bağlantılarını yapılandırma desteği.</p>
-    <p xml:lang="uk">Підтримка налаштовування з'єднань із віртуальними приватними мережами VPN SSL з використанням OpenConnect.</p>
-    <p xml:lang="zh_CN">支持配置使用 OpenConnect 的 SSL VPN 虚拟专用网络。</p>
     <p>Compatible with Cisco AnyConnect, Juniper and ocserv based networks.</p>
     <p xml:lang="ca">Compatible amb xarxes basades en Cisco AnyConnect, Juniper o ocserv.</p>
     <p xml:lang="cs">Kompatibilní s Cisco AnyConnect, Juniper a sítěmi založenými na ocserv.</p>
-    <p xml:lang="da">Kompatibel med Cisco AnyConnect, Juniper og ocserv-baserede netværk.</p>
     <p xml:lang="de">Kompatibel zu Cisco AnyConnect, Juniper und auf ocserv basierenden Netzen.</p>
     <p xml:lang="es">Compatible con Cisco AnyConnect, Juniper y redes basadas en ocserv.</p>
-    <p xml:lang="fi">Yhteensopiva Cisco AnyConnectin, Juniperin ja ocserv-pohjaisten verkkojen kanssa.</p>
-    <p xml:lang="hr">Kompatibilno sa Cisco AnyConnect, Juniper i ocserv temeljenim mrežama.</p>
     <p xml:lang="hu">Kompatibilis a Cisco AnyConnect, Juniper és ocserv alapú hálózatokkal.</p>
     <p xml:lang="id">Kompatibel dengan AnyConnect Cisco, Juniper, dan jaringan berbasis ocserv.</p>
     <p xml:lang="lt">Suderinamas su Cisco AnyConnect, Juniper ir ocserv pagrindo tinklais.</p>
-    <p xml:lang="nl">Compatibel met Cisco AnyConnect, Juniper en op ocserv gebaseerde netwerken.</p>
     <p xml:lang="pl">Zgodne z sieciami opartymi na Cisco AnyConnect, Juniper i ocserv.</p>
     <p xml:lang="pt_BR">Compatível com redes baseadas em Cisco AnyConnect, Juniper e ocserv.</p>
-    <p xml:lang="sk">Kompatibilná so sieťami založenými na Cisco AnyConnect, Juniper a ocserv.</p>
     <p xml:lang="sr">Сагласно са мрежама заснованим на Цисковом Ени конекту, Џаниперу и оцсерв-у.</p>
     <p xml:lang="sr@latin">Saglasno sa mrežama zasnovanim na Ciskovom Eni konektu, Džaniperu i ocserv-u.</p>
     <p xml:lang="sv">Kompatibel med Cisco AnyConnect, Juniper och ocserv-baserade nätverk.</p>
-    <p xml:lang="tr">Cisco AnyConnect, Juniper ve ocserv tabanlı ağlar ile uyumludur.</p>
-    <p xml:lang="uk">Сумісний із заснованими на Cisco AnyConnect, Juniper і ocserv мережами.</p>
-    <p xml:lang="zh_CN">兼容于思科 AnyConnect、瞻博（Juniper）和基于 ocserv 的网络。</p>
   </description>
 
   <screenshots>
     <screenshot type="default">
-      <image width="800" height="734">https://gitlab.gnome.org/GNOME/NetworkManager-openconnect/raw/master/appdata/openconnect.png</image>
+      <image width="800" height="734">https://git.gnome.org/browse/network-manager-openconnect/plain/appdata/openconnect.png</image>
     </screenshot>
   </screenshots>
 
   <url type="homepage">https://wiki.gnome.org/Projects/NetworkManager/VPN</url>
-  <url type="bugtracker">https://gitlab.gnome.org/GNOME/NetworkManager-openconnect/issues</url>
+  <url type="bugtracker">https://bugzilla.gnome.org/enter_bug.cgi?product=NetworkManager</url>
   <update_contact>networkmanager-maint@gnome.bugs</update_contact>
   <translation type="gettext">NetworkManager-openconnect</translation>
   <developer_name>The NetworkManager Developers</developer_name>
-  <developer_name xml:lang="ca">L'equip de desenvolupament del NetworkManager</developer_name>
+  <developer_name xml:lang="ca">Els desenvolupadors del NetworkManager</developer_name>
   <developer_name xml:lang="cs">Vývojáři NetworkManageru</developer_name>
-  <developer_name xml:lang="da">Udviklerne af Netværkshåndtering</developer_name>
   <developer_name xml:lang="de">Die Entwickler von NetworkManager</developer_name>
   <developer_name xml:lang="es">Los desarrolladores de NetworkManager</developer_name>
-  <developer_name xml:lang="fi">NetworkManagerin kehittäjät</developer_name>
-  <developer_name xml:lang="hr">Razvijatelji Mrežnog upravitelja</developer_name>
   <developer_name xml:lang="hu">A Hálózatkezelő fejlesztői</developer_name>
   <developer_name xml:lang="id">Para Pengembang NetworkManager</developer_name>
   <developer_name xml:lang="lt">NetworkManager kūrėjai</developer_name>
-  <developer_name xml:lang="nl">De NetworkManager-ontwikkelaars</developer_name>
   <developer_name xml:lang="pl">Programiści projektu NetworkManager</developer_name>
   <developer_name xml:lang="pt_BR">Os desenvolvedores NetworkManager</developer_name>
-  <developer_name xml:lang="sk">Vývojári správcu siete NetworkManager</developer_name>
-  <developer_name xml:lang="sl">Razvijalci programa NetworkManager</developer_name>
   <developer_name xml:lang="sr">Програмери Управника мреже</developer_name>
   <developer_name xml:lang="sr@latin">Programeri Upravnika mreže</developer_name>
   <developer_name xml:lang="sv">Utvecklarna av Nätverkshanteraren</developer_name>
-  <developer_name xml:lang="tr">NetworkManager Geliştiricileri</developer_name>
-  <developer_name xml:lang="uk">Розробники NetworkManager</developer_name>
-  <developer_name xml:lang="zh_CN">NetworkManager 开发者</developer_name>
 </component>

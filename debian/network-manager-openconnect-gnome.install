@@ -1,4 +1,4 @@
 usr/lib/*/NetworkManager/libnm-vpn-plugin-openconnect-editor.so
-usr/lib/*/NetworkManager/libnm-gtk4-vpn-plugin-openconnect-editor.so
 usr/lib/NetworkManager/nm-openconnect-auth-dialog
-usr/share/appdata/network-manager-openconnect.metainfo.xml usr/share/metainfo/
+usr/share/appdata/network-manager-openconnect.metainfo.xml
+usr/share/gnome-vpn-properties

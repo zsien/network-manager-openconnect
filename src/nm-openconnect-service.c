@@ -84,17 +84,14 @@ static const ValidProperty valid_properties[] = {
 	{ NM_OPENCONNECT_KEY_AUTHTYPE,    G_TYPE_STRING, 0, 0 },
 	{ NM_OPENCONNECT_KEY_USERCERT,    G_TYPE_STRING, 0, 0 },
 	{ NM_OPENCONNECT_KEY_PRIVKEY,     G_TYPE_STRING, 0, 0 },
-	{ NM_OPENCONNECT_KEY_KEY_PASS,    G_TYPE_STRING, 0, 0 },
 	{ NM_OPENCONNECT_KEY_MTU,         G_TYPE_STRING, 0, 0 },
 	{ NM_OPENCONNECT_KEY_PEM_PASSPHRASE_FSID, G_TYPE_BOOLEAN, 0, 0 },
-	{ NM_OPENCONNECT_KEY_PREVENT_INVALID_CERT, G_TYPE_BOOLEAN, 0, 0 },
 	{ NM_OPENCONNECT_KEY_PROTOCOL,    G_TYPE_STRING, 0, 0 },
 	{ NM_OPENCONNECT_KEY_PROXY,       G_TYPE_STRING, 0, 0 },
 	{ NM_OPENCONNECT_KEY_CSD_ENABLE,  G_TYPE_BOOLEAN, 0, 0 },
 	{ NM_OPENCONNECT_KEY_CSD_WRAPPER, G_TYPE_STRING, 0, 0 },
 	{ NM_OPENCONNECT_KEY_TOKEN_MODE,  G_TYPE_STRING, 0, 0 },
 	{ NM_OPENCONNECT_KEY_TOKEN_SECRET, G_TYPE_STRING, 0, 0 },
-	{ NM_OPENCONNECT_KEY_REPORTED_OS, G_TYPE_STRING, 0, 0 },
 	{ NULL,                           G_TYPE_NONE, 0, 0 }
 };
 
@@ -102,7 +99,6 @@ static const ValidProperty valid_secrets[] = {
 	{ NM_OPENCONNECT_KEY_COOKIE,  G_TYPE_STRING, 0, 0 },
 	{ NM_OPENCONNECT_KEY_GATEWAY, G_TYPE_STRING, 0, 0 },
 	{ NM_OPENCONNECT_KEY_GWCERT,  G_TYPE_STRING, 0, 0 },
-	{ NM_OPENCONNECT_KEY_RESOLVE, G_TYPE_STRING, 0, 0 },
 	{ NULL,                       G_TYPE_NONE, 0, 0 }
 };
 
@@ -389,14 +385,12 @@ nm_openconnect_start_openconnect_binary (NMOpenconnectPlugin *plugin,
                                          GError **error)
 {
 	NMOpenconnectPluginPrivate *priv = NM_OPENCONNECT_PLUGIN_GET_PRIVATE (plugin);
-	GPid pid;
+	GPid	pid;
 	const char **openconnect_binary = NULL;
 	GPtrArray *openconnect_argv;
 	GSource *openconnect_watch;
-	gint stdin_fd;
-	char csd_user_arg[60];
+	gint	stdin_fd;
 	const char *props_vpn_gw, *props_cookie, *props_cacert, *props_mtu, *props_gwcert, *props_proxy;
-	const char *props_csd_enable, *props_csd_wrapper, *props_resolve;
 	const char *protocol;
 
 	/* Find openconnect */
@@ -438,7 +432,6 @@ nm_openconnect_start_openconnect_binary (NMOpenconnectPlugin *plugin,
 		return -1;
 	}
 	props_gwcert = nm_setting_vpn_get_secret (s_vpn, NM_OPENCONNECT_KEY_GWCERT);
-	props_resolve = nm_setting_vpn_get_secret (s_vpn, NM_OPENCONNECT_KEY_RESOLVE);
 
 	props_cacert = nm_setting_vpn_get_data_item (s_vpn, NM_OPENCONNECT_KEY_CACERT);
 	props_mtu = nm_setting_vpn_get_data_item (s_vpn, NM_OPENCONNECT_KEY_MTU);
@@ -489,35 +482,7 @@ nm_openconnect_start_openconnect_binary (NMOpenconnectPlugin *plugin,
 		g_ptr_array_add (openconnect_argv, (gpointer) priv->tun_name);
 	}
 
-	props_csd_enable = nm_setting_vpn_get_data_item (s_vpn, NM_OPENCONNECT_KEY_CSD_ENABLE);
-	props_csd_wrapper = nm_setting_vpn_get_data_item (s_vpn, NM_OPENCONNECT_KEY_CSD_WRAPPER);
-	if (props_csd_enable && !strcmp (props_csd_enable, "yes") && props_csd_wrapper) {
-		/* TODO: disable passing the script to openconnect.
-		 *
-		 * As we have priv->tun_name, openconnect will run as an unpriviledged user NM_OPENCONNECT_USER.
-		 * However, it is still not safe to run untrusted scripts provided by the user.
-		 *
-		 * This needs a different solution, for now, just log a warning. */
-		if (FALSE && priv->tun_name) {
-			/* Replicate the CSD parameters used in the authentication phase, for
-			   supported protocols which may need to invoke the security trojan ("CSD")
-			   in the tunnel/connection phase. */
-			g_ptr_array_add (openconnect_argv, (gpointer) "--csd-wrapper");
-			g_ptr_array_add (openconnect_argv, (gpointer) props_csd_wrapper);
-			g_ptr_array_add (openconnect_argv, (gpointer) "--csd-user");
-			g_ptr_array_add (openconnect_argv, (gpointer) nm_sprintf_buf (csd_user_arg, "%d", gl.tun_owner));
-		} else {
-			_LOGW ("openconnect won't call csd-wrapper script because it cannot drop privileges to user \"%s\"",
-			       NM_OPENCONNECT_USER);
-		}
-	}
-
 	g_ptr_array_add (openconnect_argv, (gpointer) props_vpn_gw);
-
-	if (props_resolve && strlen(props_resolve)) {
-		g_ptr_array_add (openconnect_argv, (gpointer) "--resolve");
-		g_ptr_array_add (openconnect_argv, (gpointer) props_resolve);
-	}
 
 	if (gl.log_level >= LOG_INFO) {
 		g_ptr_array_add (openconnect_argv, (gpointer) "--verbose");
@@ -638,7 +603,7 @@ real_disconnect (NMVpnServicePlugin   *plugin,
 	NMOpenconnectPluginPrivate *priv = NM_OPENCONNECT_PLUGIN_GET_PRIVATE (plugin);
 
 	if (priv->pid) {
-		if (kill (priv->pid, SIGINT) == 0)
+		if (kill (priv->pid, SIGTERM) == 0)
 			g_timeout_add (2000, ensure_killed, GINT_TO_POINTER (priv->pid));
 		else
 			kill (priv->pid, SIGKILL);

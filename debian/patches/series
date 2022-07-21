@@ -1,2 +1,8 @@
-0001-Support-GlobalProtect-SAML-SSO-MFA.patch
-deepin-bug-63126-hide-auth-dialog.patch
+0001-PAN-GlobalProtect-pass-gp-protocol-to-openconnect.patch
+0002-PAN-GlobalProtect-Add-gp-to-supported-protocols-list.patch
+0003-service-use-SIGINT-to-stop-openconnect-on-disconnect.patch
+git_certkey_export.patch
+git_reported_os.patch
+git_can_persist.patch
+git_tpm2_key.patch
+git_password_config.patch
