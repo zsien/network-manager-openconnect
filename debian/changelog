@@ -1,3 +1,11 @@
+network-manager-openconnect (1.2.4.1-5+dde) unstable; urgency=medium
+
+  [ lvpeilong ]
+  * deepin-bug-63126-hide-auth-dialog
+  * UNRELEASED
+
+ -- caixiangrong <caixiangrong@uniontech.com>  Mon, 25 Jul 2022 13:41:33 +0800
+
 network-manager-openconnect (1.2.4.1-4+dde) UNRELEASED; urgency=medium
 
   * deepin-bug-63126-hide-auth-dialog
