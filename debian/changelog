@@ -1,22 +1,78 @@
-network-manager-openconnect (1.2.4.1-5+dde) UNRELEASED; urgency=medium
+network-manager-openconnect (1.2.8-3) unstable; urgency=medium
 
-  * update
+  * Bump Standards-Version to 4.6.1, no changes
+  * Upload to unstable. (Closes: #1011362)
 
- -- Mike Miller <mtmiller@debian.org>  Mon, 25 Jul 2022 13:44:06 +0800
+ -- Luca Boccassi <bluca@debian.org>  Sat, 21 May 2022 14:35:15 +0100
 
-network-manager-openconnect (1.2.4.1-5+dde) unstable; urgency=medium
+network-manager-openconnect (1.2.8-2) experimental; urgency=medium
 
-  [ lvpeilong ]
-  * deepin-bug-63126-hide-auth-dialog
-  * UNRELEASED
+  * Really enable GTK 4 support (Closes: #1009101)
+  * Use execute_before instead of override in d/rules
 
- -- caixiangrong <caixiangrong@uniontech.com>  Mon, 25 Jul 2022 13:41:33 +0800
+ -- Luca Boccassi <bluca@debian.org>  Fri, 08 Apr 2022 12:17:04 +0100
 
-network-manager-openconnect (1.2.4.1-4+dde) UNRELEASED; urgency=medium
+network-manager-openconnect (1.2.8-1) experimental; urgency=medium
 
-  * deepin-bug-63126-hide-auth-dialog
+  * Update upstream source from tag 'upstream/1.2.8'
+    - ported to GTK4
+  * Drop merged bugfix  patches and refresh pending SAML patch
+  * Build-depend on libgtk4-dev and libnma-dev
+  * Drop gnome-vpn-properties from install file, no longer built
 
- -- lvpeilong <lvpeilong@uniontech.com>  Thu, 21 Jul 2022 17:23:10 +0800
+ -- Luca Boccassi <bluca@debian.org>  Sun, 13 Mar 2022 23:26:32 +0000
+
+network-manager-openconnect (1.2.6-4) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Remove constraints unnecessary since buster
+
+  [ Luca Boccassi ]
+  * Bump dependency on libopenconnect for SAML patch
+
+ -- Luca Boccassi <bluca@debian.org>  Mon, 21 Feb 2022 01:03:09 +0000
+
+network-manager-openconnect (1.2.6-3) unstable; urgency=medium
+
+  * Backport patches to fix IPv6 DNS and IPv4 routing rules
+  * Update lintian overrides
+  * Bump copyright year ranges in d/copyright
+
+ -- Luca Boccassi <bluca@debian.org>  Fri, 04 Feb 2022 11:33:47 +0000
+
+network-manager-openconnect (1.2.6-2) unstable; urgency=medium
+
+  * Backport patch to support SAML SSO
+  * Bump Standards-Version to 4.6.0, no changes
+  * Bump debhelper-compat to 13
+  * Bump d/copyright year range
+  * Bump d/watch version
+  * Add bug tracking URLs to d/upstream/metadata
+  * Update lintian override
+
+ -- Luca Boccassi <bluca@debian.org>  Sun, 12 Dec 2021 15:27:13 +0000
+
+network-manager-openconnect (1.2.6-1) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Set upstream metadata fields: Repository, Repository-Browse.
+
+  [ Luca Boccassi ]
+  * Update upstream source from tag 'upstream/1.2.6'
+    Closes: #935199, #953752
+  * Drop patches directory, all merged in 1.2.6
+  * Add Build-Depends on libgcr-3-dev, new requirement of 1.2.6
+  * Drop --without-libnm-glib, removed upstream
+  * Delete *.la files before dh_install runs
+  * Set hardening=+all to enable BindNow
+  * Add d/copyright entry for appdata file
+  * Install metainfo in /usr/share/metainfo
+  * Fix capitalization-error-in-description
+  * Update package description to mention more protocols
+  * Add Lintian overrides for executable-in-usr-lib
+  * Add Lintian override for testsuite-autopkgtest-missing
+
+ -- Luca Boccassi <bluca@debian.org>  Tue, 24 Mar 2020 10:43:26 +0000
 
 network-manager-openconnect (1.2.4-4) unstable; urgency=medium
 

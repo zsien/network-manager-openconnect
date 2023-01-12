@@ -1,0 +1,3 @@
+# This is NM's interface
+network-manager-openconnect: executable-in-usr-lib usr/lib/NetworkManager/nm-openconnect-service
+network-manager-openconnect: executable-in-usr-lib usr/lib/NetworkManager/nm-openconnect-service-openconnect-helper

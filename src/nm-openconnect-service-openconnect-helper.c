@@ -214,39 +214,60 @@ addr6_to_gvariant (const char *str)
 	return g_variant_builder_end (&builder);
 }
 
-static GVariant *
-addr6_list_to_gvariant (const char *str)
+static void
+addr46_list_to_gvariant (const char *str, GVariant **legacy, GVariant **ipv6)
 {
-	GVariantBuilder builder;
+	GVariantBuilder *builder4 = NULL;
+	GVariantBuilder *builder6 = NULL;
 	char **split;
 	int i;
 
 	/* Empty */
 	if (!str || strlen (str) < 1)
-		return NULL;
+		return;
 
 	split = g_strsplit (str, " ", -1);
 	if (g_strv_length (split) == 0)
-		return NULL;
-
-	g_variant_builder_init (&builder, G_VARIANT_TYPE ("aay"));
+		return;
 
 	for (i = 0; split[i]; i++) {
-		GVariant *val = addr6_to_gvariant (split[i]);
+		struct in_addr addr;
+		GVariant *val;
 
-		if (val) {
-			g_variant_builder_add_value (&builder, val);
+		if (inet_pton (AF_INET, split[i], &addr) > 0) {
+			if (!builder4)
+				builder4 = g_variant_builder_new (G_VARIANT_TYPE_ARRAY);
+			g_variant_builder_add_value (builder4, g_variant_new_uint32 (addr.s_addr));
+		} else if ((val = addr6_to_gvariant (split[i]))) {
+			if (!builder6)
+				builder6 = g_variant_builder_new (G_VARIANT_TYPE ("aay"));
+			g_variant_builder_add_value (builder6, val);
 		} else {
 			g_strfreev (split);
-			g_variant_unref (g_variant_builder_end (&builder));
-			return NULL;
+			if (builder4)
+				g_variant_builder_unref (builder4);
+			if (builder6)
+				g_variant_builder_unref (builder6);
+			return;
 		}
 	}
 
 	g_strfreev (split);
 
-	return g_variant_builder_end (&builder);
-}
+	if (builder4) {
+		*legacy = g_variant_builder_end (builder4);
+		g_variant_builder_unref (builder4);
+	} else {
+		*legacy = NULL;
+	}
+
+	if (builder6) {
+		*ipv6 = g_variant_builder_end (builder6);
+		g_variant_builder_unref (builder6);
+	} else {
+		*ipv6 = NULL;
+	}
+	}
 
 static GVariant *
 split_dns_list_to_gvariant (const char *str)
@@ -324,7 +345,7 @@ get_ip4_routes (void)
 
 			errno = 0;
 			tmp_prefix = strtol (tmp, NULL, 10);
-			if (errno || tmp_prefix <= 0 || tmp_prefix > 32) {
+			if (errno || tmp_prefix < 0 || tmp_prefix > 32) {
 				_LOGW ("Ignoring invalid static route prefix '%s'", tmp ? tmp : "NULL");
 				continue;
 			}
@@ -398,7 +419,7 @@ get_ip6_routes (void)
 
 			errno = 0;
 			tmp_prefix = strtol (tmp, NULL, 10);
-			if (errno || tmp_prefix <= 0 || tmp_prefix > 128) {
+			if (errno || tmp_prefix < 0 || tmp_prefix > 128) {
 				_LOGW ("Ignoring invalid static route prefix '%s'", tmp ? tmp : "NULL");
 				continue;
 			}
@@ -447,6 +468,7 @@ main (int argc, char *argv[])
 	GVariantBuilder builder, ip4builder, ip6builder;
 	GVariant *ip4config, *ip6config;
 	GVariant *val;
+	GVariant *legacy_dns = NULL, *ipv6_dns = NULL;
 	GError *err = NULL;
 	struct in_addr temp_addr;
 	char *bus_path;
@@ -519,6 +541,9 @@ main (int argc, char *argv[])
 	else
 		helper_failed (proxy, "VPN Gateway");
 
+	val = g_variant_new_boolean (TRUE);
+	g_variant_builder_add (&builder, "{sv}", NM_VPN_PLUGIN_CAN_PERSIST, val);
+
 	/* Tunnel device */
 	val = str_to_gvariant (getenv ("TUNDEV"), FALSE);
 	if (val)
@@ -580,9 +605,11 @@ main (int argc, char *argv[])
 	}
 
 	/* DNS */
-	val = addr4_list_to_gvariant (getenv ("INTERNAL_IP4_DNS"));
-	if (val)
-		g_variant_builder_add (&ip4builder, "{sv}", NM_VPN_PLUGIN_IP4_CONFIG_DNS, val);
+	addr46_list_to_gvariant (getenv ("INTERNAL_IP4_DNS"), &legacy_dns, &ipv6_dns);
+	if (legacy_dns)
+		g_variant_builder_add (&ip4builder, "{sv}", NM_VPN_PLUGIN_IP4_CONFIG_DNS, legacy_dns);
+	if (ipv6_dns)
+		g_variant_builder_add (&ip6builder, "{sv}", NM_VPN_PLUGIN_IP6_CONFIG_DNS, ipv6_dns);
 
 	/* WINS servers */
 	val = addr4_list_to_gvariant (getenv ("INTERNAL_IP4_NBNS"));
@@ -654,11 +681,6 @@ main (int argc, char *argv[])
 		val = g_variant_new_uint32 (strtol (tmp + 1, NULL, 10));
 		g_variant_builder_add (&ip6builder, "{sv}", NM_VPN_PLUGIN_IP6_CONFIG_PREFIX, val);
 	}
-
-	/* DNS */
-	val = addr6_list_to_gvariant (getenv ("INTERNAL_IP6_DNS"));
-	if (val)
-		g_variant_builder_add (&ip6builder, "{sv}", NM_VPN_PLUGIN_IP6_CONFIG_DNS, val);
 
 	/* Routes */
 	val = get_ip6_routes ();

@@ -1,1 +1,0 @@
-rm_conffile /etc/NetworkManager/VPN/nm-openconnect-service.name 1.2.4-1.1~

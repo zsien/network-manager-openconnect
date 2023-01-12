@@ -1,0 +1,2 @@
+# This is NM's interface
+network-manager-openconnect-gnome: executable-in-usr-lib usr/lib/NetworkManager/nm-openconnect-auth-dialog
